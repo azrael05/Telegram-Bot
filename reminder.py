@@ -5,6 +5,9 @@ import numpy as np
 import os
 from files import create
 
+## Columns "ID","Reminder","Day","Finished"
+
+
 def add_reminder(reminder,id):
     if not os.path.exists(str(id)+".xlsx"):
         create(id)
@@ -38,4 +41,5 @@ def finish_reminder(rem_id,id):
     ws=wb["reminder"]
     for i in range(ws.max_row):
         if ws.cell(row=i,column=1)==str(rem_id):
-            ws.cell(row=i,column=4).value("Y")
+            ws.cell(row=i,column=4).value="Y"
+    wb.save(filename="{id}.xlsx".format(id=id))

@@ -4,7 +4,7 @@ import openpyxl as op
 import datetime
 import pandas as pd
 import numpy as np
-
+## Columns "ID","Name","Date","Finished"
 
 def add_book(book_name,id):
     if not os.path.exists(str(id)+".xlsx"):
@@ -36,6 +36,7 @@ def finish_book(book_id,id):
     for i in range(ws.max_row):
         if ws.cell(row=i,column=1)==str(book_id):
             ws.cell(row=i,column=4).value="Y"
+    wb.save(filename="{id}.xlsx".format(id=id))
 
 def remove_book(book_id,id):
     df=pd.read_excel(str(id)+".xlsx")

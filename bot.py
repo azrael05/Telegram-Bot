@@ -18,8 +18,6 @@ def send_welcome(message):
     bot.reply_to(message, show_reminder() if show_reminder() else "Nothing to reminder")
 
 
-import json
-import numpy as np
 @bot.message_handler(func=lambda msg: True)
 def confirm_order(message):
     id=message.chat.id
