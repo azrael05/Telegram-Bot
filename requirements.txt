@@ -1,0 +1,4 @@
+openpyxl
+telebot
+numpy
+pandas

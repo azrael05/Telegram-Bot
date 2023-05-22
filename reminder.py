@@ -39,7 +39,17 @@ def count_reminders(id):
 def finish_reminder(rem_id,id):
     wb=op.load_workbook(str(id)+".xlsx")
     ws=wb["reminder"]
-    for i in range(ws.max_row):
-        if ws.cell(row=i,column=1)==str(rem_id):
+    for i in range(1,ws.max_row+1):
+        if ws.cell(row=i,column=1).value==str(rem_id):
             ws.cell(row=i,column=4).value="Y"
+    wb.save(filename="{id}.xlsx".format(id=id))
+
+
+def remove_reminder(rem_id,id):
+    wb=op.load_workbook(str(id)+".xlsx")
+    ws=wb["book"]
+    for i in range(1,ws.max_row+1):
+        if ws.cell(row=i,column=1).value==str(rem_id):
+            ws.delete_rows(i)
+            break
     wb.save(filename="{id}.xlsx".format(id=id))

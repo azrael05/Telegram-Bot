@@ -37,19 +37,31 @@ def confirm_order(message):
     
     elif text.startswith(("show books","show book","show all books","show all book","list books","list book","all books","all book")):
         books=show_books(id)
-        bot.reply_to(message,books)
+        bot.reply_to(message,"Here is the list of books:-\n"+books)
     
     
     elif text.startswith(("show reminders","show reminder","list reminders","list reminder","show all reminders","show all reminder","all reminder","all reminders")):
         reminder=show_reminder(id)
-        bot.reply_to(message,reminder)
+        bot.reply_to(message,"List of reminders:- \n"+ reminder)
 
-    elif text.startswith(("book finished","completed book","remove book","book remove","book completed")):
+    elif text.startswith(("book finished","completed book","book completed")):
         book_id=text.split(" ")[-1]
-        finish_book(book_id,id)
-    
-    elif text.startswith("reminder remove"):
+        book_name=finish_book(book_id,id)
+        bot.reply_to(message,"Marked {book} as read".format(book=book_name))
+
+
+    elif text.startswith(("reminder finished","completed reminder","reminder completed","reminder done")):
         rem_id=text.split(" ")[-1]
-        finish_book(rem_id,id)
+        finish_reminder(rem_id,id)
+    
+    elif text.startswith(("remove book","book remove")):
+        book_id=text.split(" ")[-1]
+        book_name=remove_book(book_id,id)
+        bot.reply_to(message,"Removed {book} from your list".format(book=book_name))
+
+    elif text.startswith(("reminder remove","remove reminder")):
+        rem_id=text.split(" ")[-1]
+        remove_reminder(rem_id,id)
+
            
 bot.infinity_polling()

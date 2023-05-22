@@ -33,11 +33,24 @@ def count_books(id):
 def finish_book(book_id,id):
     wb=op.load_workbook(str(id)+".xlsx")
     ws=wb["book"]
-    for i in range(ws.max_row):
-        if ws.cell(row=i,column=1)==str(book_id):
+    book_name=""
+    for i in range(1,ws.max_row+1):
+        if ws.cell(row=i,column=1).value==str(book_id):
             ws.cell(row=i,column=4).value="Y"
+            book_name=ws.cell(row=i,column=2).value
+            break
     wb.save(filename="{id}.xlsx".format(id=id))
+    return book_name
 
 def remove_book(book_id,id):
-    df=pd.read_excel(str(id)+".xlsx")
-    df.drop(np.where(df["ID"]==str(book_id))[0],axis=0)
+    wb=op.load_workbook(str(id)+".xlsx")
+    ws=wb["book"]
+    book_name=""
+    for i in range(1,ws.max_row+1):
+        if ws.cell(row=i,column=1).value==str(book_id):
+            book_name=ws.cell(row=i,column=2).value
+            ws.delete_rows(i)
+            break
+    wb.save(filename="{id}.xlsx".format(id=id))
+    return book_name
+    
