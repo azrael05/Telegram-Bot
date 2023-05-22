@@ -1,88 +1,9 @@
-import os
-import pandas as pd
 import telebot
-import numpy as np
+from book import *
+from reminder import *
 BOT_TOKEN="5911996942:AAE9rRbyK_Y9NuvG1zBkq6xVmBznsMfsLFI"
 bot = telebot.TeleBot(BOT_TOKEN)
-import datetime
-import openpyxl as op
 
-def create(id):
-    wb=op.Workbook()
-    wb.create_sheet("book")
-    ws=wb["book"]
-    ws.append(("ID","Name","Date","Finished"))
-    wb.create_sheet("reminder")
-    ws=wb["reminder"]
-    ws.append(("ID","Reminder","Day","Finished"))
-    wb.save(filename="{id}.xlsx".format(id=id))
-
-def add_book(book_name,id):
-    if not os.path.exists(str(id)+".xlsx"):
-        create(id)
-    wb=op.load_workbook("{id}.xlsx".format(id=id))
-    wb.active=wb["book"]
-    ws=wb.active
-    ws.append((str(ws.max_row+1),book_name[1:].capitalize(),datetime.date.today(),"N"))
-    wb.save(filename="{id}.xlsx".format(id=id))
-
-
-def show_books(id):
-    df=pd.read_excel(str(id)+".xlsx",sheet_name="book")
-    pos=np.where(df["Finished"]=="N")[0]
-    books=""
-    for i in pos:
-        books+=str(df["ID"].iloc[i])+"->"+str(df["Name"].iloc[i])+"\n"
-    return books
-
-def add_reminder(reminder,id):
-    if not os.path.exists(str(id)+".xlsx"):
-        create(id)
-    wb=op.load_workbook("{id}.xlsx".format(id=id))
-    wb.active=wb["reminder"]
-    ws=wb.active
-    ws.append((str(ws.max_row+1),reminder[1:].capitalize(),datetime.date.today(),"N"))
-    wb.save(filename="{id}.xlsx".format(id=id))
-    
-
-def show_reminder(id):
-    df=pd.read_excel(str(id)+".xlsx",sheet_name="reminder")
-    pos=np.where(df["Finished"]=="N")[0]
-    reminder=""
-    for i in pos:
-        reminder+=str(df["ID"].iloc[i])+"->"+str(df["Reminder"].iloc[i])+"\n"
-    return reminder
-
-def count_books(id):
-    df=pd.read_excel(str(id)+".xlsx",sheet_name="book")
-    pos=np.where(df["Finished"]=="N")[0]
-    count=pos.shape[0]
-    return count
-
-def count_reminders(id):
-    df=pd.read_excel(str(id)+".xlsx",sheet_name="reminder")
-    pos=np.where(df["Finished"]=="N")[0]
-    count=pos.shape[0]
-    return count
-
-def finish_book(book_id,id):
-    wb=op.load_workbook(str(id)+".xlsx")
-    ws=wb["book"]
-    for i in range(ws.max_row):
-        if ws.cell(row=i,column=1)==str(book_id):
-            ws.cell(row=i,column=4).value="Y"
-
-
-def finish_reminder(rem_id,id):
-    wb=op.load_workbook(str(id)+".xlsx")
-    ws=wb["reminder"]
-    for i in range(ws.max_row):
-        if ws.cell(row=i,column=1)==str(rem_id):
-            ws.cell(row=i,column=4).value("Y")
-
-def remove_book(book_id,id):
-    df=pd.read_excel(str(id)+".xlsx")
-    df.drop(np.where(df["ID"]==str(book_id))[0],axis=0)
 
 @bot.message_handler(commands=['start', 'hello'])
 def send_welcome(message):
