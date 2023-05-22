@@ -23,7 +23,7 @@ def confirm_order(message):
     id=message.chat.id
     text=message.text
     text=str(text).lower()
-    if text.startswith(("add book","new book")):
+    if text.startswith(("add book","new book","book")):
         book_name=text.split("book")[-1]
         add_book(book_name,id)
         bot.reply_to(message,"Book added to your list {book}. \n\nNow you have {count} books in your list.".format(book=book_name[1:],count=count_books(id)))
@@ -44,13 +44,13 @@ def confirm_order(message):
         reminder=show_reminder(id)
         bot.reply_to(message,"List of reminders:- \n"+ reminder)
 
-    elif text.startswith(("book finished","completed book","book completed")):
+    elif text.startswith(("book finished","completed book","book completed","finished book","mark book")):
         book_id=text.split(" ")[-1]
         book_name=finish_book(book_id,id)
         bot.reply_to(message,"Marked {book} as read".format(book=book_name))
 
 
-    elif text.startswith(("reminder finished","completed reminder","reminder completed","reminder done")):
+    elif text.startswith(("reminder finished","completed reminder","reminder completed","reminder done","mark reminder")):
         rem_id=text.split(" ")[-1]
         finish_reminder(rem_id,id)
     

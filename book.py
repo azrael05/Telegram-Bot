@@ -12,7 +12,7 @@ def add_book(book_name,id):
     wb=op.load_workbook("{id}.xlsx".format(id=id))
     wb.active=wb["book"]
     ws=wb.active
-    ws.append((str(ws.max_row+1),book_name[1:].capitalize(),datetime.date.today(),"N"))
+    ws.append((str(ws.max_row),book_name[1:].capitalize(),datetime.date.today(),"N"))
     wb.save(filename="{id}.xlsx".format(id=id))
 
 
