@@ -41,8 +41,10 @@ def finish_reminder(rem_id,id):
     ws=wb["reminder"]
     for i in range(1,ws.max_row+1):
         if ws.cell(row=i,column=1).value==str(rem_id):
+            rem=ws.cell(row=i,column=2).value
             ws.cell(row=i,column=4).value="Y"
     wb.save(filename="{id}.xlsx".format(id=id))
+    return rem
 
 
 def remove_reminder(rem_id,id):
@@ -50,6 +52,8 @@ def remove_reminder(rem_id,id):
     ws=wb["book"]
     for i in range(1,ws.max_row+1):
         if ws.cell(row=i,column=1).value==str(rem_id):
+            rem=ws.cell(row=i,column=2).value
             ws.delete_rows(i)
             break
     wb.save(filename="{id}.xlsx".format(id=id))
+    return rem
