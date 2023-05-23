@@ -29,7 +29,15 @@ def remove_list(list_id,id):
 def show_list(id):
     wb=op.load_workbook(str(id)+".xlsx")
     list_names=wb.sheetnames
-    string=""
-    for list in list_names:
+    string="\n"
+    for list in list_names[1:]:
         string+=str(list_names.index(list))+"-"+list+"\n"
     return string
+
+def get_help():
+    with open("variables.py","r") as f:
+        lines=f.readlines()
+    help=""
+    for line in lines:
+        help+=line
+    return help
