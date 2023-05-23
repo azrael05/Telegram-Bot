@@ -35,7 +35,6 @@ def confirm_order(message):
     text=str(text).lower()
     if text.startswith("help"):
         help=get_help()
-        bot.
         bot.reply_to(message,"On the Right you have the function and on the left is the different commands which can be used for that function\n"+help)
     
     if text.startswith(v.show_books):
