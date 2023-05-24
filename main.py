@@ -79,7 +79,7 @@ def confirm_order(message):
     
     elif text.startswith(v.add_list):
         name=text.split("list")[-1]
-        create_list(name,id)
+        create_list(name[1:],id)
         bot.reply_to(message,"Created new list with title"+name)
     
     elif text.startswith(v.remove_list):
@@ -90,4 +90,21 @@ def confirm_order(message):
     elif text.startswith(v.show_list):
         string=show_list(id)
         bot.reply_to(message,"List is"+string)
+    
+    elif text.startswith(v.add_user_list):
+        list_name=text.split(" ")[1]
+        all_list=get_list(id)
+        if list_name not in all_list:
+            bot.reply_to(message,"List doesn't exists. Create list first")
+        else:
+            add_element(list_name,text.split(list_name)[-1],id)
+        bot.reply_to(message,"added movie"+text.split(list_name)[-1])
+    elif text.startswith(v.show_user_list):
+        list_name=text.split(" ")[1]
+        all_list=get_list(id)
+        if list_name not in all_list:
+            bot.reply_to(message,"List doesn't exists. Create list first")
+        else:
+            string=show_element(list_name,id)
+            bot.reply_to(message,string)
 bot.infinity_polling()

@@ -3,6 +3,7 @@
 ## Books
 add_book=("add book",
           "new book",
+          "insert book",
           "book")
 
 finish_book=("book finished",
@@ -62,3 +63,8 @@ remove_list=("remove list",
 
 show_list=("show list",
            "all lists")
+
+## Custom List
+add_user_list=("add ")
+show_user_list=("show",
+                "all")
