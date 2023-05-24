@@ -64,3 +64,15 @@ def show_element(list_name,id):
     for i in pos:
         books+=str(df["ID"].iloc[i])+"->"+str(df["Name"].iloc[i])+"\n"
     return books
+
+def remove_element(list_name,element_id,id):
+    wb=op.load_workbook(get_excel_path(id))
+    ws=wb[list_name]
+    element_name=""
+    for i in range(1,ws.max_row+1):
+        if ws.cell(row=i,column=1).value==str(element_id):
+            element_name=ws.cell(row=i,column=2).value
+            ws.delete_rows(i)
+            break
+    wb.save(get_excel_path(id))
+    return element_name
