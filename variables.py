@@ -1,21 +1,21 @@
 #  On the Right you have the function and on the left is the different commands which can be used for that function
 
 ## Books
-add_book=("add book",
+var_add_book=("add book",
           "new book",
           "insert book",
           "book")
 
-finish_book=("book finished",
+var_finish_book=("book finished",
              "completed book",
              "book completed",
              "finished book",
              "mark book")
 
-remove_book=("remove book",
+var_remove_book=("remove book",
              "book remove")
 
-show_books=("show books",
+var_show_books=("show books",
             "show book",
             "show all books",
             "show all book",
@@ -27,23 +27,23 @@ show_books=("show books",
 
 
 ## Reminders
-add_reminder=("add reminder",
+var_add_reminder=("add reminder",
               "set reminder",
               "reminder",
               "create reminder",
               "set reminder",
               "new reminder")
 
-mark_reminder=("reminder finished",
+var_mark_reminder=("reminder finished",
                "completed reminder",
                "reminder completed",
                "reminder done",
                "mark reminder")
-remove_reminder=("reminder remove",
+var_remove_reminder=("reminder remove",
                "remove reminder",
                "delete reminder")
 
-show_reminders=("show reminders",
+var_show_reminders=("show reminders",
                 "show reminder",
                 "list reminders",
                 "list reminder",
@@ -54,17 +54,20 @@ show_reminders=("show reminders",
 
 
 ## Creating New
-add_list=("create list",
+var_add_list=("create list",
           "new list",
           "add list")
 
-remove_list=("remove list",
+var_remove_list=("remove list",
              "delete list")
 
-show_list=("show list",
+var_show_list=("show list",
            "all lists")
 
 ## Custom List
-add_user_list=("add ")
-show_user_list=("show",
+var_add_user_list=("add ")
+var_show_user_list=("show",
                 "all")
+import os
+def get_excel_path(id):
+    return os.path.join("..","files",str(id)+".xlsx")

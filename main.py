@@ -37,61 +37,61 @@ def confirm_order(message):
         help=get_help()
         bot.reply_to(message,"On the Right you have the function and on the left is the different commands which can be used for that function\n"+help)
     
-    if text.startswith(v.show_books):
+    if text.startswith(v.var_show_books):
         books=show_books(id)
         bot.reply_to(message,"Here is the list of books:-\n"+books)
     
     
-    elif text.startswith(v.show_reminders):
+    elif text.startswith(v.var_show_reminders):
         reminder=show_reminder(id)
         bot.reply_to(message,"List of reminders:- \n"+ reminder)
 
-    elif text.startswith(v.finish_book):
+    elif text.startswith(v.var_finish_book):
         book_id=text.split(" ")[-1]
         book_name=finish_book(book_id,id)
         bot.reply_to(message,"Marked {book} as read".format(book=book_name))
 
 
-    elif text.startswith(v.mark_reminder):
+    elif text.startswith(v.var_mark_reminder):
         rem_id=text.split(" ")[-1]
         rem=finish_reminder(rem_id,id)
         bot.reply_to(message,rem+"marked as finished")
     
-    elif text.startswith(v.remove_book):
+    elif text.startswith(v.var_remove_book):
         book_id=text.split(" ")[-1]
         book_name=remove_book(book_id,id)
         bot.reply_to(message,"Removed {book} from your list".format(book=book_name))
 
-    elif text.startswith(v.remove_reminder):
+    elif text.startswith(v.var_remove_reminder):
         rem_id=text.split(" ")[-1]
         rem=remove_reminder(rem_id,id)
         bot.reply_to(message,"Reminder removed :-"+rem)
     
-    elif text.startswith(v.add_book):
+    elif text.startswith(v.var_add_book):
         book_name=text.split("book")[-1]
         add_book(book_name,id)
         bot.reply_to(message,"Book added to your list {book}. \n\nNow you have {count} books in your list.".format(book=book_name[1:],count=count_books(id)))
     
-    elif text.startswith(v.add_reminder):
+    elif text.startswith(v.var_add_reminder):
         reminder=text.split("reminder")[-1]
         add_reminder(reminder,id)
         bot.reply_to(message,"Added reminder for {reminder}. Now there are {count} reminders in your list.".format(reminder=reminder,count=count_reminders(id)))
     
-    elif text.startswith(v.add_list):
+    elif text.startswith(v.var_add_list):
         name=text.split("list")[-1]
         create_list(name[1:],id)
         bot.reply_to(message,"Created new list with title"+name)
     
-    elif text.startswith(v.remove_list):
+    elif text.startswith(v.var_remove_list):
         list_id=text.split(" ")[-1]
         name=remove_list(list_id,id)
         bot.reply_to(message,"Removed list"+name)
 
-    elif text.startswith(v.show_list):
+    elif text.startswith(v.var_show_list):
         string=show_list(id)
         bot.reply_to(message,"List is"+string)
     
-    elif text.startswith(v.add_user_list):
+    elif text.startswith(v.var_add_user_list):
         list_name=text.split(" ")[1]
         all_list=get_list(id)
         if list_name not in all_list:
@@ -99,7 +99,7 @@ def confirm_order(message):
         else:
             add_element(list_name,text.split(list_name)[-1],id)
         bot.reply_to(message,"added movie"+text.split(list_name)[-1])
-    elif text.startswith(v.show_user_list):
+    elif text.startswith(v.var_show_user_list):
         list_name=text.split(" ")[1]
         all_list=get_list(id)
         if list_name not in all_list:
