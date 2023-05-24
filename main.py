@@ -98,7 +98,7 @@ def confirm_order(message):
             bot.reply_to(message,"List doesn't exists. Create list first")
         else:
             add_element(list_name,text.split(list_name)[-1],id)
-        bot.reply_to(message,"added movie"+text.split(list_name)[-1])
+            bot.reply_to(message,"added movie"+text.split(list_name)[-1])
     elif text.startswith(v.var_show_user_list):
         list_name=text.split(" ")[1]
         all_list=get_list(id)
