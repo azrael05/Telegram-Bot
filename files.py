@@ -76,3 +76,6 @@ def remove_element(list_name,element_id,id):
             break
     wb.save(get_excel_path(id))
     return element_name
+
+def keshv_randi(name):
+    print(f"keshav {name} ka muh mei leta hai")
